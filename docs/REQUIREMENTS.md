@@ -129,6 +129,35 @@ Como não vai precisar de autenticação, compartilhamento de tracks e nuvem ini
     * roteamento.
   * Os metadados exportados devem ser organizados em formato estruturado, como JSON.
   * O formato dos metadados deve permitir evolução futura por meio de controle de versão.
+  * O pacote exportado deve conter metadados do VS, como:
+    * ID ou identificador exportável;
+    * nome do VS;
+    * ordem das faixas;
+    * duração total;
+    * BPM original, quando informado;
+    * tom original, quando informado;
+    * ajuste de BPM geral;
+    * ajuste de tom geral;
+    * data de exportação;
+    * versão do formato de exportação.
+  * O pacote exportado deve conter metadados de cada faixa, como:
+    * ID da faixa;
+    * nome visível da faixa;
+    * nome do arquivo original, quando exportado;
+    * nome do arquivo processado;
+    * sample rate;
+    * quantidade de canais;
+    * bit depth;
+    * duração;
+    * quantidade total de frames;
+    * volume;
+    * mute;
+    * solo;
+    * pan;
+    * roteamento;
+    * ajuste de tom individual;
+    * ajuste de BPM individual.
+
 
 ### Mixagem e roteamento de faixas
 
@@ -166,6 +195,22 @@ Como não vai precisar de autenticação, compartilhamento de tracks e nuvem ini
   * O pan deve permitir posicionar a faixa à esquerda, ao centro ou à direita.
   * O pan deve ser aplicado durante a mixagem do áudio.
   * O pan deve ser salvo junto às configurações da faixa.
+
+* **[RF-206]**: Como usuário, quero alterar o tom de uma faixa para adaptar a reprodução à tonalidade desejada.
+
+  * O usuário deve poder ajustar o tom de uma faixa individualmente.
+  * O ajuste de tom deve permitir aumentar ou diminuir a tonalidade em semitons.
+  * O ajuste de tom deve ser aplicado durante a reprodução.
+  * O ajuste de tom deve ser salvo junto às configurações da faixa.
+  * O ajuste de tom não deve alterar necessariamente o arquivo WAV processado original da faixa.
+
+* **[RF-207]**: Como usuário, quero alterar o BPM de uma faixa para adaptar a velocidade da reprodução à necessidade musical.
+
+  * O usuário deve poder ajustar o BPM ou a velocidade de reprodução de uma faixa individualmente.
+  * O ajuste de BPM deve permitir aumentar ou diminuir a velocidade da faixa.
+  * O ajuste de BPM deve ser aplicado durante a reprodução.
+  * O ajuste de BPM deve ser salvo junto às configurações da faixa.
+  * O ajuste de BPM não deve alterar necessariamente o arquivo WAV processado original da faixa.
 
 ### Reprodução de VS
 
@@ -229,6 +274,30 @@ Como não vai precisar de autenticação, compartilhamento de tracks e nuvem ini
   * Ao abrir novamente um VS, o sistema deve restaurar as configurações anteriores.
   * As configurações devem ser associadas ao VS e às suas respectivas faixas.
 
+* **[RF-310]**: Como usuário, quero alterar o tom geral de um VS para adaptar todas as faixas à tonalidade desejada.
+
+  * O usuário deve poder aumentar ou diminuir o tom geral do VS em semitons.
+  * A alteração de tom geral deve ser aplicada a todas as faixas ativas durante a reprodução.
+  * O sistema deve preservar a sincronia entre as faixas ao aplicar alteração de tom.
+  * A configuração de tom geral deve ser salva junto às configurações do VS.
+  * A alteração de tom geral não deve alterar necessariamente os arquivos WAV processados das faixas.
+
+* **[RF-311]**: Como usuário, quero alterar o BPM geral de um VS para adaptar a velocidade da música à necessidade da execução.
+
+  * O usuário deve poder aumentar ou diminuir o BPM geral do VS.
+  * A alteração de BPM geral deve ser aplicada a todas as faixas ativas durante a reprodução.
+  * O sistema deve preservar a sincronia entre as faixas ao aplicar alteração de BPM.
+  * A configuração de BPM geral deve ser salva junto às configurações do VS.
+  * A alteração de BPM geral não deve alterar necessariamente os arquivos WAV processados das faixas.
+
+* **[RF-312]**: Como usuário, quero que as configurações de tom e BPM sejam respeitadas durante a reprodução do VS.
+
+  * O sistema deve aplicar o tom geral do VS durante a reprodução.
+  * O sistema deve aplicar o BPM geral do VS durante a reprodução.
+  * O sistema deve aplicar ajustes individuais de tom e BPM das faixas, quando existirem.
+  * O sistema deve definir uma regra de prioridade entre ajustes gerais do VS e ajustes individuais das faixas.
+  * O sistema deve manter todas as faixas sincronizadas mesmo após alterações de tom ou BPM.
+
 ## Requisitos Não Funcionais
 
 ### Armazenamento local
@@ -284,4 +353,40 @@ Como não vai precisar de autenticação, compartilhamento de tracks e nuvem ini
 * **[RNF-020]**: O aplicativo deve preservar a quantidade de canais do arquivo original sempre que possível.
 
 * **[RNF-021]**: O aplicativo deve validar os arquivos processados antes da reprodução para garantir compatibilidade com a engine de áudio.
+
+### Processamento de áudio
+
+* **[RNF-022]**: O aplicativo deve preservar a sincronia entre as faixas ao aplicar alterações de BPM.
+
+* **[RNF-023]**: O aplicativo deve preservar a sincronia entre as faixas ao aplicar alterações de tom.
+
+* **[RNF-024]**: O aplicativo deve evitar alterar permanentemente os arquivos WAV processados ao aplicar mudanças de tom ou BPM durante a reprodução.
+
+* **[RNF-025]**: O processamento de alteração de tom e BPM deve buscar minimizar artefatos audíveis, como distorções, cortes ou perda excessiva de qualidade.
+
+* **[RNF-026]**: As configurações de tom e BPM devem ser persistidas no banco de dados local junto às configurações do VS ou das faixas.
+
+* **[RNF-027]**: As configurações de tom e BPM devem ser incluídas nos metadados de exportação/importação do VS.
+
+--- 
+
+### Mixagem e roteamento de faixas
+
+
+---
+
+### Reprodução de VS
+
+
+---
+
+### Importação e exportação de VS
+
+Adicionar ao **[RF-153]**:
+
+
+---
+
+## Requisitos Não Funcionais
+
 
