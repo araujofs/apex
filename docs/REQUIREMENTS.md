@@ -368,23 +368,6 @@ Como não vai precisar de autenticação, compartilhamento de tracks e nuvem ini
 
 * **[RNF-027]**: As configurações de tom e BPM devem ser incluídas nos metadados de exportação/importação do VS.
 
---- 
-
-### Mixagem e roteamento de faixas
-
-
----
-
-### Reprodução de VS
-
-
----
-
-### Importação e exportação de VS
-
-Adicionar ao **[RF-153]**:
-
-
 ---
 
 ## Requisitos Não Funcionais
